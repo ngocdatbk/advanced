@@ -1,0 +1,27 @@
+<?php
+
+namespace common\widgets;
+
+use yii\base\Widget;
+use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
+
+class ImageGallery extends Widget
+{
+    public $images;
+    public $options = [
+    ];
+
+    public function init()
+    {
+        parent::init();
+    }
+
+    public function run()
+    {
+        return $this->render('image_gallery', [
+                'images' => $this->images,
+                'options' => $this->options,
+        ]);
+    }
+}

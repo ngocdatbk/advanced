@@ -8,17 +8,34 @@ $params = array_merge(
 
 return [
     'id' => 'app-frontend',
+    'name' => 'Saotruc',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'defaultRoute' => 'pub/dashboard',
     'controllerNamespace' => 'frontend\controllers',
+    'layout' => 'frontend_horizontal',
+    'bootstrap' => ['log'],
+    'modules' => [
+        'pub' => [
+            'class' => 'app\modules\pub\Module',
+        ],
+        'user' => [
+            'class' => 'app\modules\user\Module',
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            'baseUrl' => '',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'class' => 'common\components\User',
+            'loginUrl' => '/user/auth/login',
+            'returnUrlParam' => '/pub/dashboard',
             'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
+            'identityCookie' => [
+                'name' => '_identity-frontend',
+                'httpOnly' => true,
+            ],
         ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend

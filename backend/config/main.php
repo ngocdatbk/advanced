@@ -8,20 +8,55 @@ $params = array_merge(
 
 return [
     'id' => 'app-backend',
+    'name' => 'Saotruc',
+    'homeUrl' => '/admin',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
+    'defaultRoute' => 'dashboard/dashboard',
+    'layout' => 'admin_vertical',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\Module',
+        ],
+        'report' => [
+            'class' => 'app\modules\report\Module',
+        ],
+        'dashboard' => [
+            'class' => 'app\modules\dashboard\Module',
+        ],
+        'email' => [
+            'class' => 'app\modules\email\Module',
+        ],
+        'cronjob' => [
+            'class' => 'app\modules\cronjob\Module',
+        ],
+        'setting' => [
+            'class' => 'app\modules\setting\Module',
+        ],
+        'user' => [
+            'class' => 'app\modules\user\Module',
+        ],
+        'permission' => [
+            'class' => 'app\modules\permission\Module',
+        ],
+        'core' => [
+            'class' => 'app\modules\core\Module',
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
+            'baseUrl' => '/admin',
             'csrfCookie' => [
                 'httpOnly' => true,
                 'path' => '/admin',
             ],
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'class' => 'common\components\User',
+            'loginUrl' => '/admin/user/auth/login',
+            'returnUrlParam' => '/admin/dashboard/dashboard',
             'enableAutoLogin' => true,
             'identityCookie' => [
                 'name' => '_identity-backend',
@@ -41,21 +76,19 @@ return [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error', 'warning', 'trace'],
                 ],
             ],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
+        'settings' => [
+            'class' => 'app\modules\setting\components\Settings',
         ],
-        */
+        'dataRegistry' => [
+            'class' => 'app\modules\core\components\DataRegistry',
+        ],
     ],
     'params' => $params,
 ];
