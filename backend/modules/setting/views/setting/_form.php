@@ -54,7 +54,7 @@ SettingAsset::register($this);
 
         <a content_id="email_marketting" class="btn btn-primary btn-collapse">Email marketing</a>
         <div id="email_marketting" class="tab-pane fade in">
-            <?= $form->field($model, 'email', ['template' => "{label} span\n{input}\n{hint}\n{error}", 'parts' => ['span' => '<span class="input_edit" input_id="email" title="edit"><i class="fa fa-pencil"></i></span>']])
+            <?= $form->field($model, 'email_shop', ['template' => "{label} span\n{input}\n{hint}\n{error}", 'parts' => ['span' => '<span class="input_edit" input_id="email_shop" title="edit"><i class="fa fa-pencil"></i></span>']])
                 ->textInput(['maxlength' => true, 'disabled' =>true]) ?>
 
             <?= $form->field($model, 'email_pass', ['template' => "{label} span\n{input}\n{hint}\n{error}", 'parts' => ['span' => '<span class="input_edit" input_id="email_pass" title="edit"><i class="fa fa-pencil"></i></span>']])

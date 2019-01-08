@@ -67,30 +67,36 @@ class OrderController extends \yii\web\Controller
                     ]
                 );
             }
-            if($order->user_order_email){
-                if(!\common\models\EmailQueue::queue(
-                    'mailer_marketing',
-                    $order->user_order_email,
-                    'Order success', Yii::$app->controller->module->id,
-                    'order_invoice',
-                    $order->getAttributes()+['detail' => $cart_cookie],
-                    Yii::$app->controller->module->id. "_" .'order_invoice'
-                )) {
-                    $transaction->rollBack();
-                    Yii::$app->session->setFlash('error', 'System error');
-                    return $this->render('create',
-                        [
-                            'model' => $order,
-                            'cart_cookie' => $cart_cookie
-                        ]
-                    );
-                }
-            }
 
             $transaction->commit();
 
             $response_cookies = Yii::$app->response->cookies;
             $response_cookies->remove('cart');
+
+            if ($order->user_order_email) {
+                \common\models\EmailQueue::queue(
+                    'mailer_marketing',
+                    $order->user_order_email,
+                    'Order success',
+                    Yii::$app->controller->module->id,
+                    'order_invoice',
+                    $order->getAttributes()+['detail' => $cart_cookie],
+                    Yii::$app->controller->module->id. "_" .'order_invoice'
+                );
+            }
+
+            $email_shop = Yii::$app->settings->get('email_shop');
+            if ($email_shop) {
+                \common\models\EmailQueue::queue(
+                    'mailer_marketing',
+                    $email_shop,
+                    'New order',
+                    Yii::$app->controller->module->id,
+                    'order_invoice',
+                    $order->getAttributes()+['detail' => $cart_cookie],
+                    Yii::$app->controller->module->id. "_" .'order_invoice'
+                );
+            }
 
             Yii::$app->session->setFlash('success', 'Create order success!');
 

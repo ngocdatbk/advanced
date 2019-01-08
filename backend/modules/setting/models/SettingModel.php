@@ -8,7 +8,7 @@ use app\modules\setting\models\Setting;
 
 class SettingModel extends Model
 {
-    public $email;
+    public $email_shop;
     public $email_pass;
     public $name;
     public $status;
@@ -23,7 +23,7 @@ class SettingModel extends Model
         return [
             [['name'], 'string', 'max' => 50],
             [['email_pass', 'facebook_pixel'], 'string'],
-            [['email'], 'email'],
+            [['email_shop'], 'email'],
             [['status'], 'integer'],
             [['gender'], 'integer'],
             [['is_admin'], 'integer'],
@@ -37,7 +37,7 @@ class SettingModel extends Model
     {
         return [
             'name' => 'Name',
-            'email' => 'Email',
+            'email_shop' => 'Email shop',
         ];
     }
 }

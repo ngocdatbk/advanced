@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 08, 2019 lúc 09:43 AM
+-- Thời gian đã tạo: Th1 08, 2019 lúc 10:55 AM
 -- Phiên bản máy phục vụ: 10.1.28-MariaDB
 -- Phiên bản PHP: 7.1.11
 
@@ -278,7 +278,7 @@ CREATE TABLE `cronjob` (
 --
 
 INSERT INTO `cronjob` (`id`, `cronjob_id`, `name`, `class`, `module_id`, `run_rules`, `last_run`, `next_run`, `is_active`, `logging_f`) VALUES
-(4, 'SendMail', 'SendMail', 'console\\controllers\\SendMailController', '', 0x7b226d696e75746573223a5b222d31225d2c22686f757273223a5b222d31225d2c226461795f74797065223a22646f77222c22646f77223a5b222d31225d7d, 1546936811, 1546936871, 1, 1);
+(4, 'SendMail', 'SendMail', 'console\\controllers\\SendMailController', '', 0x7b226d696e75746573223a5b222d31225d2c22686f757273223a5b222d31225d2c226461795f74797065223a22646f77222c22646f77223a5b222d31225d7d, 1546941011, 1546941071, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -2767,7 +2767,20 @@ INSERT INTO `cronjob_log` (`cronjob_id`, `execution_time`, `status`) VALUES
 ('SendMail', 1546935911, 'Success.'),
 ('SendMail', 1546936211, 'Success.'),
 ('SendMail', 1546936511, 'Success.'),
-('SendMail', 1546936811, 'Success.');
+('SendMail', 1546936811, 'Success.'),
+('SendMail', 1546937111, 'Success.'),
+('SendMail', 1546937411, 'Success.'),
+('SendMail', 1546937711, 'Success.'),
+('SendMail', 1546938011, 'Success.'),
+('SendMail', 1546938311, 'Success.'),
+('SendMail', 1546938611, 'Success.'),
+('SendMail', 1546938911, 'Success.'),
+('SendMail', 1546939211, 'Success.'),
+('SendMail', 1546939511, 'Success.'),
+('SendMail', 1546939811, 'Success.'),
+('SendMail', 1546940111, 'Success.'),
+('SendMail', 1546940411, 'Success.'),
+('SendMail', 1546940711, 'Success.');
 
 -- --------------------------------------------------------
 
@@ -2798,6 +2811,14 @@ CREATE TABLE `email_queue` (
   `created_date` int(11) DEFAULT NULL COMMENT 'ngày tạo',
   `status` tinyint(4) DEFAULT '0' COMMENT 'trạng thái của mail'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `email_queue`
+--
+
+INSERT INTO `email_queue` (`id`, `from`, `to`, `subject`, `layout`, `module_id`, `content_id`, `extra_data`, `created_date`, `status`) VALUES
+(2, 'mailer_marketing', 'nemkhucgia@gmail.com', 'Order success', 'pub_order_invoice', 'pub', 'order_invoice', 0x613a31353a7b733a323a226964223b693a34323b733a31353a22757365725f6f726465725f6e616d65223b733a373a2270687520747565223b733a31363a22757365725f6f726465725f70686f6e65223b733a31303a2230333636303430363936223b733a31363a22757365725f6f726465725f656d61696c223b733a32303a226e656d6b68756367696140676d61696c2e636f6d223b733a31373a22757365725f726563656976655f6e616d65223b733a303a22223b733a31383a22757365725f726563656976655f70686f6e65223b733a303a22223b733a31383a22757365725f726563656976655f656d61696c223b733a303a22223b733a32303a22757365725f726563656976655f61646472657373223b733a393a22746861692062696e68223b733a31303a226f726465725f74696d65223b693a313534363934303838323b733a393a22757365725f6e6f7465223b733a343a2278787878223b733a353a22746f74616c223b693a3230303030303b733a363a22737461747573223b693a303b733a31303a2261646d696e5f6e6f7465223b4e3b733a393a2264656c657465645f66223b4e3b733a363a2264657461696c223b613a313a7b693a393b613a323a7b733a383a227175616e74697479223b693a313b733a363a2264657461696c223b613a383a7b733a323a226964223b693a393b733a343a22636f6465223b733a353a224dc4903033223b733a343a226e616d65223b733a32303a2253c3a16f204dc3a86f20c490656e204dc4903033223b733a343a22696e666f223b733a31343a2253c3a16f204dc3a86f20c490656e223b733a353a227072696365223b693a3230303030303b733a31303a22696d6167655f6d61696e223b733a31373a2275706c6f6164732f74696575312e6a7067223b733a31313a2263617465676f72795f6964223b693a313b733a393a2264656c657465645f66223b693a303b7d7d7d7d, 1546940882, 0),
+(3, 'mailer_marketing', 'ngocdatbk@gmail.com', 'New order', 'pub_order_invoice', 'pub', 'order_invoice', 0x613a31353a7b733a323a226964223b693a34323b733a31353a22757365725f6f726465725f6e616d65223b733a373a2270687520747565223b733a31363a22757365725f6f726465725f70686f6e65223b733a31303a2230333636303430363936223b733a31363a22757365725f6f726465725f656d61696c223b733a32303a226e656d6b68756367696140676d61696c2e636f6d223b733a31373a22757365725f726563656976655f6e616d65223b733a303a22223b733a31383a22757365725f726563656976655f70686f6e65223b733a303a22223b733a31383a22757365725f726563656976655f656d61696c223b733a303a22223b733a32303a22757365725f726563656976655f61646472657373223b733a393a22746861692062696e68223b733a31303a226f726465725f74696d65223b693a313534363934303838323b733a393a22757365725f6e6f7465223b733a343a2278787878223b733a353a22746f74616c223b693a3230303030303b733a363a22737461747573223b693a303b733a31303a2261646d696e5f6e6f7465223b4e3b733a393a2264656c657465645f66223b4e3b733a363a2264657461696c223b613a313a7b693a393b613a323a7b733a383a227175616e74697479223b693a313b733a363a2264657461696c223b613a383a7b733a323a226964223b693a393b733a343a22636f6465223b733a353a224dc4903033223b733a343a226e616d65223b733a32303a2253c3a16f204dc3a86f20c490656e204dc4903033223b733a343a22696e666f223b733a31343a2253c3a16f204dc3a86f20c490656e223b733a353a227072696365223b693a3230303030303b733a31303a22696d6167655f6d61696e223b733a31373a2275706c6f6164732f74696575312e6a7067223b733a31313a2263617465676f72795f6964223b693a313b733a393a2264656c657465645f66223b693a303b7d7d7d7d, 1546940882, 0);
 
 -- --------------------------------------------------------
 
@@ -2886,7 +2907,8 @@ INSERT INTO `order` (`id`, `user_order_name`, `user_order_phone`, `user_order_em
 (38, 'phu tue', '0366040696', 'ngocdatbk@gmail.com', '', '', '', 'thai binh', 1546856076, 'cccc', 400000, 0, NULL, 0),
 (39, 'phu tue', '0366040696', 'ngocdatbk@gmail.com', '', '', '', 'thai binh', 1546856348, 'xxx', 200000, 0, NULL, 0),
 (40, 'khuc dat', '0366040696', 'ngocdatbk@gmail.com', '', '', '', 'thai binh', 1546916683, 'xxx', 600000, 0, NULL, 0),
-(41, 'dat', '0366040696', 'ngocdatbk@gmail.com', '', '', '', 'thai binh', 1546933833, 'xxx', 800000, 0, NULL, 0);
+(41, 'dat', '0366040696', 'ngocdatbk@gmail.com', '', '', '', 'thai binh', 1546933833, 'xxx', 800000, 0, NULL, 0),
+(42, 'phu tue', '0366040696', 'nemkhucgia@gmail.com', '', '', '', 'thai binh', 1546940882, 'xxxx', 200000, 0, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -2923,7 +2945,8 @@ INSERT INTO `order_detail` (`id`, `order_id`, `product_id`, `quantity`, `deleted
 (51, 39, 9, 1, 0),
 (52, 40, 5, 1, 0),
 (53, 40, 9, 1, 0),
-(54, 41, 5, 2, 0);
+(54, 41, 5, 2, 0),
+(55, 42, 9, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -3060,8 +3083,8 @@ CREATE TABLE `setting` (
 --
 
 INSERT INTO `setting` (`key`, `value`, `modified`) VALUES
-('email', 'ngocdatbk@gmail.com', 1542771412),
 ('email_pass', 'ÆsÁäa>¦\'`Ó÷Î<ã&39533cf247dcc04a72ea4ac5275630ea95e563ce853e576fbcf5692ca816aecfFxÈ÷eÄV41¸ÚXÁ\r ,ç¬Þ0;Lî©¸è{', 1542773030),
+('email_shop', 'ngocdatbk@gmail.com', 1542771412),
 ('facebook_pixel', '154822101884046', 1546926338),
 ('gender', '1', 1542786413),
 ('is_admin', '0', 1546933308),
@@ -3095,7 +3118,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `username`, `gender`, `email`, `phone_number`, `fullname`, `is_active`, `is_admin`, `last_login`, `allowance`, `allowance_updated_at`) VALUES
 (1, 'datkhucngoc@admicro.vn', 'Male', 'datkhucngoc@admicro.vn', '', 'Khúc Ngọc Đạt', 1, 0, 1544818649, NULL, NULL),
-(5, 'ngocdatbk@gmail.com', 'Male', 'ngocdatbk@gmail.com', '', 'khuc dat', 1, 0, 1546922775, NULL, NULL),
+(5, 'ngocdatbk@gmail.com', 'Male', 'ngocdatbk@gmail.com', '', 'khuc dat', 1, 0, 1546940409, NULL, NULL),
 (6, 'khucngocdat1989', '', 'khucngocdat1989@gmail.com', '03666040696', 'khuc dat', 1, 0, 1543388229, NULL, NULL),
 (8, 'khucphutue', 'Male', 'khucphutue@gmail.com', '03666040696', 'Phú Tuệ', 1, 0, 1544817937, NULL, NULL),
 (9, 'phuteo@gmail.com', 'Unspecified', 'phuteo@gmail.com', NULL, 'phu teo', 1, 0, 1545272524, NULL, NULL),
@@ -3293,19 +3316,19 @@ ALTER TABLE `cronjob`
 -- AUTO_INCREMENT cho bảng `email_queue`
 --
 ALTER TABLE `email_queue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'mã order', AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'mã order', AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT cho bảng `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT cho bảng `product`
