@@ -34,6 +34,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'baseUrl'=> '/',
+            'hostInfo' => 'http://saotruc.com',
             'rules' => [
             ],
         ],
