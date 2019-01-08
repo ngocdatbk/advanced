@@ -50,7 +50,8 @@ class CronController extends Controller
         if (Yii::$app->hasModule($task->module_id)) {
             $module = Yii::$app->getModule($task->module_id);
         } else {
-            return 'Module not found.';
+            $module = Yii::$app->id;
+//            return 'Module not found.';
         }
 
         $class = new $cronClass($task->cronjob_id, $module);

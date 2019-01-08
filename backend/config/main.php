@@ -83,11 +83,12 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'settings' => [
-            'class' => 'app\modules\setting\components\Settings',
-        ],
-        'dataRegistry' => [
-            'class' => 'app\modules\core\components\DataRegistry',
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'hostInfo' => 'http://saotruc.com',
+            'rules' => [
+            ],
         ],
     ],
     'params' => $params,

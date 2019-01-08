@@ -11,6 +11,10 @@ $this->title = Yii::t("pub.product",$product->category->name);
 $this->params['breadcrumbs'][] = ['label' => Yii::t("pub.product",$product->category->name), 'url' => ['/pub/product', 'category_id' => $product->category_id]];
 $this->params['breadcrumbs'][] = Yii::t("pub.product",$product->name);
 ?>
+<script>
+    fbq('track', 'ViewContent');
+</script>
+
 
 <div class="container">
     <div class="row">
@@ -24,7 +28,7 @@ $this->params['breadcrumbs'][] = Yii::t("pub.product",$product->name);
             <span class="product-price"><b><?= Yii::$app->formatter->asCurrency($product->price) ?></b></span>
             <form method="get" action="<?= Url::to(["/pub/cart/add"]) ?>">
                 <?= Html::hiddenInput("product_id",$product->id) ?>
-                <button class="btn btn-success btn-block btn-buy" type="submit" >Buy it now</button>
+                <button class="btn btn-success btn-block btn-buy" type="submit" onclick="fbq('track', 'AddToCart');" >Buy it now</button>
             </form>
             <div class="social-share">
                 <p>Chia sẻ sản phẩm này!</p>

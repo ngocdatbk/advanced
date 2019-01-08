@@ -35,7 +35,7 @@ class Cronjob extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cronjob_id', 'name', 'class', 'module_id', 'run_rules'], 'required'],
+            [['cronjob_id', 'name', 'class', 'run_rules'], 'required'],
             [['run_rules'], 'string'],
             [['last_run', 'next_run', 'is_active', 'logging_f'], 'integer'],
             [['cronjob_id', 'module_id'], 'string', 'max' => 50],

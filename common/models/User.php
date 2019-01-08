@@ -109,7 +109,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         $loggedUserId = Yii::$app->session->get('loggedUserId');
 
-        if ($loggedUserId && $viewAsData = Yii::$app->dataRegistry->get('viewAsUser')) {
+        if ($loggedUserId && $viewAsData = unserialize(Yii::$app->settings->get('viewAsUser'))) {
             if (isset($viewAsData[$loggedUserId]['viewAsUserId']) && $id == $loggedUserId) {
                 $id = $viewAsData[$loggedUserId]['viewAsUserId'];
             }

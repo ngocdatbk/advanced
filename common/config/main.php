@@ -11,12 +11,6 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],
         'i18n' => [
             'translations' => [
                 'app.*' => [
@@ -40,6 +34,9 @@ return [
             'class' => 'yii\rbac\DbManager',
             // uncomment if you want to cache RBAC items hierarchy
             // 'cache' => 'cache',
+        ],
+        'settings' => [
+            'class' => 'common\components\Settings',
         ],
     ],
 ];

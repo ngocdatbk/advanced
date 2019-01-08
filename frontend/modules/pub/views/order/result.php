@@ -8,6 +8,10 @@ use app\modules\pub\assets\OrderAsset;
 
 OrderAsset::register($this);
 ?>
+<script>
+    fbq('track', 'InitiateCheckout');
+</script>
+
 <div class="container order-result">
     <div class="row">
         <div class="col-lg-12">

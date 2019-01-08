@@ -53,14 +53,15 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'hostInfo' => 'http://saotruc.com',
             'rules' => [
+                'pub/products/<category_id:\d+>' => 'pub/product/index',
+                'pub/product/<id:\d+>' => 'pub/product/detail',
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

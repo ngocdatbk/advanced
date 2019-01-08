@@ -30,6 +30,13 @@ return [
                 ],
             ],
         ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'baseUrl'=> '/',
+            'rules' => [
+            ],
+        ],
     ],
     'params' => $params,
 ];

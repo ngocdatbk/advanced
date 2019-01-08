@@ -20,7 +20,7 @@ class ViewAs extends Widget
     protected function getIsViewAs()
     {
         $loggedUserId = Yii::$app->session->get('loggedUserId');
-        $viewAsData = Yii::$app->dataRegistry->get('viewAsUser');
+        $viewAsData = unserialize(Yii::$app->settings->get('viewAsUser'));
 
         if (isset($viewAsData[$loggedUserId]['loggedUserId']) && $viewAsData[$loggedUserId]['loggedUserId'] == $loggedUserId) {
             return true;

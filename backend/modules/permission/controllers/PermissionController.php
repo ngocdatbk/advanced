@@ -74,12 +74,12 @@ class PermissionController extends Controller
 
             Yii::$app->session->set('loggedUserId', Yii::$app->user->id);
 
-            $viewAsData = Yii::$app->dataRegistry->get('viewAsUser');
+            $viewAsData = unserialize(Yii::$app->settings->get('viewAsUser'));
             $viewAsData[Yii::$app->user->id] = [
                 'loggedUserId' => Yii::$app->user->id,
             ];
 
-            Yii::$app->dataRegistry->set('viewAsUser', $viewAsData);
+            Yii::$app->settings->set('viewAsUser', serialize($viewAsData));
         }
 
         if (!Yii::$app->session->get('loggedUserId')) {
@@ -89,7 +89,7 @@ class PermissionController extends Controller
         $loggedUserId = Yii::$app->session->get('loggedUserId');
 
         if ($id && $loggedUserId) {
-            $viewAsData = Yii::$app->dataRegistry->get('viewAsUser');
+            $viewAsData = unserialize(Yii::$app->settings->get('viewAsUser'));
 
             if (empty($viewAsData) || !isset($viewAsData[$loggedUserId])) {
                 $viewAsData[$loggedUserId] = [
@@ -99,7 +99,7 @@ class PermissionController extends Controller
 
             $viewAsData[$loggedUserId]['viewAsUserId'] = $id;
 
-            Yii::$app->dataRegistry->set('viewAsUser', $viewAsData);
+            Yii::$app->settings->set('viewAsUser', serialize($viewAsData));
         }
 
         return $this->goHome();
@@ -108,18 +108,14 @@ class PermissionController extends Controller
     public function actionReset($redirect = '')
     {
         $loggedUserId = Yii::$app->session->get('loggedUserId');
-        $viewAsData = Yii::$app->dataRegistry->get('viewAsUser');
+        $viewAsData = unserialize(Yii::$app->settings->get('viewAsUser'));
         $redirect = !empty($redirect) ? $redirect : Yii::$app->request->referrer;
 
         if(isset($viewAsData[$loggedUserId])) {
             unset($viewAsData[$loggedUserId]);
         }
 
-        if(!empty($viewAsData)) {
-            Yii::$app->dataRegistry->set('viewAsUser', $viewAsData);
-        } else {
-            Yii::$app->dataRegistry->delete('viewAsUser');
-        }
+        Yii::$app->settings->set('viewAsUser', serialize($viewAsData));
 
         Yii::$app->session->set('loggedUserId', null);
 

@@ -1,9 +1,9 @@
 <?php
-namespace app\modules\setting\components;
+namespace common\components;
 
 use Yii;
 use yii\base\Component;
-use app\modules\setting\models\Setting as SettingDatabase;
+use common\models\Setting as SettingDatabase;
 
 class Settings extends Component
 {
@@ -27,7 +27,7 @@ class Settings extends Component
     public function get($key, $default = null)
     {
         $settings = $this->getAll();
-        return $this->has($key)?$settings[$key]:$default;
+        return isset($settings[$key])?$settings[$key]:$default;
     }
 
     public function set($key, $value)
@@ -50,7 +50,7 @@ class Settings extends Component
     public function has($key): bool
     {
         $settings = $this->getAll();
-        return !isset($settings[$key]);
+        return isset($settings[$key]);
     }
 
     public function resetCache()

@@ -14,6 +14,7 @@ class SettingModel extends Model
     public $status;
     public $gender;
     public $is_admin;
+    public $facebook_pixel;
     /**
      * {@inheritdoc}
      */
@@ -21,7 +22,7 @@ class SettingModel extends Model
     {
         return [
             [['name'], 'string', 'max' => 50],
-            [['email_pass'], 'string'],
+            [['email_pass', 'facebook_pixel'], 'string'],
             [['email'], 'email'],
             [['status'], 'integer'],
             [['gender'], 'integer'],

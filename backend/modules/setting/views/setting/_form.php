@@ -25,6 +25,9 @@ SettingAsset::register($this);
     <div class="tab-content">
         <a content_id="system" class="btn btn-primary btn-collapse">System</a>
         <div id="system" class="tab-pane fade in active">
+            <?= $form->field($model, 'facebook_pixel', ['template' => "{label} span\n{input}\n{hint}\n{error}", 'parts' => ['span' => '<span class="input_edit" input_id="facebook_pixel" title="edit"><i class="fa fa-pencil"></i></span>']])
+                ->textInput(['maxlength' => true, 'disabled' =>true]) ?>
+
             <?= $form->field($model, 'name', ['template' => "{label} span\n{input}\n{hint}\n{error}", 'parts' => ['span' => '<span class="input_edit" input_id="name" title="edit"><i class="fa fa-pencil"></i></span>']])
                 ->textInput(['maxlength' => true, 'disabled' =>true]) ?>
 
