@@ -5,8 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\dashboard\models\DashCell */
 
-$this->title = 'Create Dash Cell';
-$this->params['breadcrumbs'][] = ['label' => 'Dash Cells', 'url' => ['index']];
+$this->title = 'Create Cell';
+$this->params['breadcrumbs'][] = ['label' => 'Layouts', 'url' => ['/dashboard/dash-layout']];
+$this->params['breadcrumbs'][] = ['label' => $layoutModel->name, 'url' => ['/dashboard/dash-layout/view', 'id' => $layoutModel->id]];
+$this->params['breadcrumbs'][] = ['label' => 'Cells', 'url' => ['index', 'layout_id' => $layoutModel->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="dash-cell-create">

@@ -4,10 +4,12 @@ namespace app\modules\dashboard\controllers;
 
 use Yii;
 use app\modules\dashboard\models\DashLayout;
-use yii\data\ActiveDataProvider;
+use app\modules\dashboard\models\DashCell;
+use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
 
 /**
  * DashLayoutController implements the CRUD actions for DashLayout model.
@@ -35,8 +37,11 @@ class DashLayoutController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => DashLayout::find(),
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => DashLayout::find()->all(),
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
 
         return $this->render('index', [
@@ -52,8 +57,10 @@ class DashLayoutController extends Controller
      */
     public function actionView($id)
     {
+        $cells = DashCell::find()->where(['layout_id' => $id])->orderBy('order')->all();
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'cells' => $cells
         ]);
     }
 

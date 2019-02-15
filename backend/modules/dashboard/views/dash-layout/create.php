@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\dashboard\models\DashLayout */
 
-$this->title = 'Create Dash Layout';
-$this->params['breadcrumbs'][] = ['label' => 'Dash Layouts', 'url' => ['index']];
+$this->title = 'Create Layout';
+$this->params['breadcrumbs'][] = ['label' => 'Layouts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="dash-layout-create">

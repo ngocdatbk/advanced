@@ -64,6 +64,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
             [['gender'], 'string'],
             [['phone_number'], 'string', 'max' => 20],
+            ['layout_id', 'integer'],
         ];
     }
 

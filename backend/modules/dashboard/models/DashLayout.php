@@ -1,6 +1,7 @@
 <?php
 
 namespace app\modules\dashboard\models;
+use app\modules\dashboard\models\DashCell;
 
 use Yii;
 
@@ -40,5 +41,19 @@ class DashLayout extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
         ];
+    }
+
+    public function getCells()
+    {
+        return $this->hasMany(DashCell::className(), ['layout_id' => 'id'])
+            ->orderBy('order');
+    }
+
+    public static function getAllLayouts()
+    {
+        return self::find()
+            ->select(['name','id'])
+            ->indexBy('id')
+            ->column();
     }
 }

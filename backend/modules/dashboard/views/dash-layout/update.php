@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\dashboard\models\DashLayout */
 
-$this->title = 'Update Dash Layout: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Dash Layouts', 'url' => ['index']];
+$this->title = 'Update Layout: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Layouts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

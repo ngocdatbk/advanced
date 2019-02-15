@@ -1,0 +1,36 @@
+/*
+    Created on : Apr 7, 2016, 8:39:55 PM
+    Author     : Administrator
+*/
+
+.preview {
+    border: 1px solid black;
+    text-align: center;
+    padding: 20px 0px;
+}
+
+.layout {
+    border: 1px solid black;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.layout-header {
+    padding: 10px 0;
+}
+
+.layout-header-left {
+    text-align: left;
+    font-weight: bold;
+}
+
+.layout-header-right {
+    text-align: right;
+}
+
+.layout-body {
+    text-align: center;
+    border-top: 1px solid black;
+    padding: 10px;
+    min-height: 270px;
+}

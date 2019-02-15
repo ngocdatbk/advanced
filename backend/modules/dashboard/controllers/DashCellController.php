@@ -4,7 +4,8 @@ namespace app\modules\dashboard\controllers;
 
 use Yii;
 use app\modules\dashboard\models\DashCell;
-use yii\data\ActiveDataProvider;
+use app\modules\dashboard\models\DashLayout;
+use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -33,27 +34,24 @@ class DashCellController extends Controller
      * Lists all DashCell models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($layout_id)
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => DashCell::find(),
+        if (!$layout_id) {
+
+        }
+
+        $layoutModel = DashLayout::findOne($layout_id);
+
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => DashCell::find()->where(['layout_id' => $layout_id])->orderBy('order')->all(),
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Displays a single DashCell model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
+            'layoutModel' => $layoutModel
         ]);
     }
 
@@ -62,16 +60,24 @@ class DashCellController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($layout_id)
     {
+        if (!$layout_id) {
+
+        }
+
+        $layoutModel = DashLayout::findOne($layout_id);
         $model = new DashCell();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->layout_id = $layout_id;
+            $model->save();
+            return $this->redirect(['index', 'layout_id' => $layout_id]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'layoutModel' => $layoutModel
         ]);
     }
 
@@ -85,13 +91,15 @@ class DashCellController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $layoutModel = DashLayout::findOne($model->layout_id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'layout_id' => $model->layout_id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'layoutModel' => $layoutModel
         ]);
     }
 
@@ -104,9 +112,11 @@ class DashCellController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $layout_id = $model->layout_id;
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index', 'layout_id' => $layout_id]);
     }
 
     /**

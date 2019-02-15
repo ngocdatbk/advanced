@@ -29,10 +29,9 @@ class DashCell extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'name', 'layout_id', 'order', 'span'], 'required'],
-            [['id', 'layout_id', 'order', 'span'], 'integer'],
+            [['name', 'layout_id', 'order', 'span'], 'required'],
+            [['layout_id', 'order', 'span'], 'integer'],
             [['name'], 'string', 'max' => 255],
-            [['id'], 'unique'],
         ];
     }
 
