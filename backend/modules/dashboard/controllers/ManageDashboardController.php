@@ -3,6 +3,7 @@
 namespace app\modules\dashboard\controllers;
 
 use Yii;
+use app\modules\dashboard\models\Dashboard;
 use app\modules\dashboard\models\DashLayout;
 use app\modules\dashboard\models\DashCell;
 use app\modules\dashboard\models\Widget;
@@ -43,7 +44,7 @@ class ManageDashboardController extends Controller
         ]);
     }
 
-    public function actionAddWidget($cell_id)
+    public function actionSelectWidget($cell_id, $project_id)
     {
         $dataProvider = new ArrayDataProvider([
             'allModels' => Widget::find()->all(),
@@ -52,8 +53,39 @@ class ManageDashboardController extends Controller
             ],
         ]);
 
-        return $this->renderAjax('add_widget', [
+        return $this->renderAjax('select_widget', [
             'dataProvider' => $dataProvider,
+            'cell_id' => $cell_id,
+            'project_id' => $project_id
         ]);
+    }
+
+    public function actionAddWidget($widget_id, $cell_id, $project_id)
+    {
+        $dashboardModel = new Dashboard();
+        $dashboardModel->widget_id = $widget_id;
+        $dashboardModel->user_id = Yii::$app->user->id;
+        $dashboardModel->cell_id = $cell_id;
+        $dashboardModel->project_id = $project_id;
+        $dashboardModel->order = 1;
+
+        if ($dashboardModel->save()) {
+            Yii::$app->session->setFlash('success', 'Add widget success!');
+        } else {
+            Yii::$app->session->setFlash('error', 'Add widget unsuccess!');
+        }
+
+        return $this->redirect(['/dashboard/manage-dashboard/index']);
+    }
+
+    public function actionDeleteWidget($dasboard_id)
+    {
+        if (Dashboard::findOne($dasboard_id)->delete()) {
+            Yii::$app->session->setFlash('success', 'Delete widget success!');
+        } else {
+            Yii::$app->session->setFlash('error', 'Delete widget unsuccess!');
+        }
+
+        return $this->redirect(['/dashboard/manage-dashboard/index']);
     }
 }

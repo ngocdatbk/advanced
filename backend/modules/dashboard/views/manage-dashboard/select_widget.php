@@ -26,19 +26,21 @@ use yii\widgets\Pjax;
                         'dataProvider' => $dataProvider,
                         'id' => 'grid-contacts',
                         'columns' => [
+                            'name',
                             [
-                                'attribute' => 'name',
-                                'format' => 'raw',
-                                'value' => function($model) {
-                                    return html::a($model->name, Url::to(['contact/view', 'id' => $model->contact_id]), ['target' => '_blank']);
-                                }
-                            ],
-                            [
-                                'label' => Yii::t('crm.lead', 'Demand status'),
-                                'format' => 'raw',
-                                'value' => function($model) {
-                                    return Html::dropDownList('demand_status_'. $model->contact_id , null, ArrayHelper::getValue(Yii::$app->controller->module->params, 'demand_status'),['id'=>'demand_status_'. $model->contact_id, 'class' => 'form-control input-sm col-lg-*']);
-                                },
+                                'class' => 'yii\grid\ActionColumn',
+                                'template' => '{add}',
+                                'buttons' => [
+                                    'add' => function ($url, $model,$key) use ($cell_id, $project_id)  {
+                                        return Html::a('<span class="btn btn-primary">Add widget</span>', ['add-widget', 'widget_id' => $model->widget_id, 'cell_id' => $cell_id, 'project_id' => $project_id], [
+                                            'title' => Yii::t('app.global', 'Cells'),
+                                        ]);
+                                    }
+                                ],
+                                'options' => [
+                                    'width' => '150px',
+                                    'text-align' => 'right'
+                                ]
                             ],
                         ],
                     ]);
@@ -50,7 +52,6 @@ use yii\widgets\Pjax;
 </div>
 
 <div class="modal-footer">
-	<?= Html::button('Luu', ['class' => 'btn btn-success', 'onclick' => 'selectLeadContact(this, "#grid-contacts", '.$model->lead_id.')']) ?>
-	<button type="button" class="btn btn-default" data-dismiss="modal"><?= Yii::t('crm.global', 'Close') ?></button>
+	<button type="button" class="btn btn-default" data-dismiss="modal"><?= Yii::t('dashboard.layout', 'Close') ?></button>
 </div>
 <?php \yii\widgets\Pjax::end() ?>

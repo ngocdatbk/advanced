@@ -3,6 +3,27 @@
     Author     : Administrator
 */
 
+.widget {
+    padding: 5px 0px;
+}
+
+.widget-content {
+    width: 200px;
+    margin: auto;
+    border: 1px solid black;
+    padding: 5px;
+    overflow: auto;
+}
+
+.widget-content-left {
+    float: left;
+    font-weight: bold;
+}
+
+.widget-content-right {
+    float: right;
+}
+
 .preview {
     border: 1px solid black;
     text-align: center;

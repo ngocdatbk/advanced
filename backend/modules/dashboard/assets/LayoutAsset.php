@@ -15,6 +15,7 @@ class LayoutAsset extends AssetBundle
      * @inheritdoc
      */
     public $js = [
+        'js/layout.js',
     ];
 
     public $css = [

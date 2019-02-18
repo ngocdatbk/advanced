@@ -41,14 +41,37 @@ LayoutAsset::register($this);
         <div class="row">
             <?php foreach ($cells as $cell) : ?>
                 <div class="preview col-sm-<?= $cell->span ?>">
-                    <?=
-                    \yii\helpers\Html::a(Yii::t('dashboard.layout', 'Add widget'), ['add-widget', 'cell_id' => $cell->id], [
-                        'class' => 'btn btn-primary btn-sm pull-right ModalTrigger',
-                        'data-target' => '#add-widget',
-                        'data-toggle' => 'modal',
-                        'data-width' => '800',
-                    ]);
-                    ?>
+                    <?php $widgets = $cell->getWidgets('frontend'); ?>
+                    <div class="container-fluid">
+                        <div class="row" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <?php foreach ($widgets as $widget) : ?>
+                            <div class="widget col-sm-12" draggable="true" ondragstart="drag(event)" id="<?= $widget['widget_id'] ?>">
+                                <div class="widget-content">
+                                    <div class="widget-content-left"><?= $widget['name'] ?></div>
+                                    <div class="widget-content-right">
+                                        <?= Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete-widget', 'dasboard_id' => $widget['dasboard_id']], [
+                                            'title' => Yii::t('app.global', 'delete'),
+                                            'data' => [
+                                                'confirm' => Yii::t('app.global', 'Are you sure you want to delete this widget?'),
+                                                'method' => 'post',
+                                            ],
+                                        ]); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach ?>
+                            <div class="widget col-sm-12">
+                                <?=
+                                \yii\helpers\Html::a(Yii::t('dashboard.layout', 'Add widget'), ['select-widget', 'cell_id' => $cell->id, 'project_id' => 'frontend'], [
+                                    'class' => 'btn btn-primary btn-sm pull-center ModalTrigger',
+                                    'data-target' => '#add-widget',
+                                    'data-toggle' => 'modal',
+                                    'data-width' => '800',
+                                ]);
+                                ?>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             <?php endforeach ?>
         </div>

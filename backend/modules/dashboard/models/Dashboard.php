@@ -12,7 +12,7 @@ use Yii;
  * @property int $cell_id
  * @property int $widget_id
  * @property int $order
- * @property int $project_id
+ * @property string $project_id
  */
 class Dashboard extends \yii\db\ActiveRecord
 {
@@ -31,7 +31,8 @@ class Dashboard extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'cell_id', 'widget_id', 'order', 'project_id'], 'required'],
-            [['user_id', 'cell_id', 'widget_id', 'order', 'project_id'], 'integer'],
+            [['user_id', 'cell_id', 'widget_id', 'order'], 'integer'],
+            [['project_id'], 'string', 'max' => 25],
         ];
     }
 
