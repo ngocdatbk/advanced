@@ -52,13 +52,14 @@ class DashCell extends \yii\db\ActiveRecord
     public function getWidgets($project_id)
     {
         return $this->find()
-            ->select(['widget.name', 'widget.widget_id', 'dashboard.id as dasboard_id'])
+            ->select(['widget.name', 'widget.widget_id', 'widget.class', 'dashboard.id as dasboard_id'])
             ->innerJoin('dashboard', 'dashboard.cell_id = dash_cell.id')
             ->innerJoin('widget', 'widget.widget_id = dashboard.widget_id')
         ->where([
             'dash_cell.id' => $this->id,
             'dashboard.user_id' => Yii::$app->user->id,
             'dashboard.project_id' => $project_id,
-        ])->asArray()->all();
+        ])
+            ->orderBy('dashboard.order')->asArray()->all();
     }
 }

@@ -5,6 +5,7 @@
 
 .widget {
     padding: 5px 0px;
+    overflow: auto;
 }
 
 .widget-content {

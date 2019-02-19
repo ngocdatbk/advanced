@@ -16,11 +16,6 @@ use yii\widgets\Pjax;
 		<div class="col-md-12">
 			<div class="box no-border">
 				<div class="box-body">
-					<div class="hidden" id="errors"></div>
-					<div class="text-center hidden process-loading">
-						<img src="images/ajaxload.info_000000_facebook.gif" alt=""> Ðang xử lý
-					</div>
-
                     <?=
                     GridView::widget([
                         'dataProvider' => $dataProvider,

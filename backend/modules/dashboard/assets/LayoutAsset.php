@@ -23,6 +23,7 @@ class LayoutAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\YiiAsset',
+        'yii\jui\JuiAsset',
     ];
 
     /**

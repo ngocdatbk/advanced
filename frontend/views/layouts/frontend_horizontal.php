@@ -58,6 +58,8 @@ $facebook_pixel = Yii::$app->settings->get('facebook_pixel');
 </head>
 <body>
 <?php $this->beginBody() ?>
+<div id="fb-root"></div>
+<script async defer src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.2&appId=351395171884559&autoLogAppEvents=1"></script>
 
 <header class="header">
     <div class="container-fluid fluid-newpad">
@@ -150,7 +152,10 @@ $facebook_pixel = Yii::$app->settings->get('facebook_pixel');
 
 <footer class="footer">
     <div class="container-fluid fluid-newpad">
-        <div class="pull-left"><?= Yii::$app->name ?></div>
+        <div class="pull-left">
+            <?= Yii::$app->name ?>
+            <div class="fb-like" data-href="https://www.facebook.com/rchobbypage/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+        </div>
         <div class="pull-right">&copy; ngocdatbk <?= date('Y') ?></div>
     </div>
 </footer>

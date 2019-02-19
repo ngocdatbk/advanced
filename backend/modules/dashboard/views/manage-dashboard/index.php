@@ -11,7 +11,7 @@ use common\widgets\Alert;
 
 $this->title = 'Manage Dashboard';
 $this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
+
 LayoutAsset::register($this);
 ?>
 <div class="dash-layout-view">
@@ -43,9 +43,10 @@ LayoutAsset::register($this);
                 <div class="preview col-sm-<?= $cell->span ?>">
                     <?php $widgets = $cell->getWidgets('frontend'); ?>
                     <div class="container-fluid">
-                        <div class="row" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="row">
+                            <div class="cell">
                         <?php foreach ($widgets as $widget) : ?>
-                            <div class="widget col-sm-12" draggable="true" ondragstart="drag(event)" id="<?= $widget['widget_id'] ?>">
+                            <div class="widget col-sm-12" data-dasboard_id="<?= $widget['dasboard_id'] ?>">
                                 <div class="widget-content">
                                     <div class="widget-content-left"><?= $widget['name'] ?></div>
                                     <div class="widget-content-right">
@@ -60,6 +61,7 @@ LayoutAsset::register($this);
                                 </div>
                             </div>
                         <?php endforeach ?>
+                            </div>
                             <div class="widget col-sm-12">
                                 <?=
                                 \yii\helpers\Html::a(Yii::t('dashboard.layout', 'Add widget'), ['select-widget', 'cell_id' => $cell->id, 'project_id' => 'frontend'], [
